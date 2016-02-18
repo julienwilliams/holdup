@@ -1,0 +1,17 @@
+package com.holdup.card.basic;
+
+import com.holdup.Game;
+import com.holdup.Utils;
+
+public class BankCard extends BasicCard {
+
+	public BankCard(Game game) {
+		super(game);
+	}
+
+	/* Take 2000 from the bank */
+	@Override
+	public void play() {
+		Utils.TransferMoney(game.getBank(), owner, 2000);
+	}
+}
