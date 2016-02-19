@@ -8,7 +8,14 @@ import com.holdup.bank.Bank;
 import com.holdup.card.Deck;
 import com.holdup.card.basic.BankCard;
 import com.holdup.card.basic.DrawCard;
+import com.holdup.card.equipment.CouteauCard;
+import com.holdup.card.equipment.DeuxPistoletCard;
 import com.holdup.card.equipment.EquipmentCard;
+import com.holdup.card.equipment.GadgetDeDistractionCard;
+import com.holdup.card.equipment.LargeBagCard;
+import com.holdup.card.equipment.MatraqueCard;
+import com.holdup.card.equipment.PanierDePartageCard;
+import com.holdup.card.equipment.PorteVoixCard;
 import com.holdup.card.equipment.SilencerCard;
 import com.holdup.player.Player;
 import com.holdup.player.role.Accomplice;
@@ -22,45 +29,22 @@ public class Holdup {
 		Bank bank = new Bank(26000);
 		
 		Stack<EquipmentCard> equipmentCards = new Stack<EquipmentCard>();
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
-		equipmentCards.add(new SilencerCard(game));
+		for (int i=0; i<30; i++) {
+			equipmentCards.add(new SilencerCard(game));
+		}
+		equipmentCards.add(new CouteauCard(game));
+		equipmentCards.add(new DeuxPistoletCard(game));
+		equipmentCards.add(new GadgetDeDistractionCard(game));
+		equipmentCards.add(new MatraqueCard(game));
+		equipmentCards.add(new LargeBagCard(game));
+		equipmentCards.add(new PanierDePartageCard(game));
+		equipmentCards.add(new PorteVoixCard(game));
 		
-		Deck pile = new Deck(equipmentCards);
+		
+		
 		Deck discard = new Deck(new Stack<EquipmentCard>());
+		Deck pile = new Deck(equipmentCards, discard);
+		pile.shuffle();
 
 		Accomplice accomplice1 = new Accomplice();
 		Accomplice accomplice2 = new Accomplice();
