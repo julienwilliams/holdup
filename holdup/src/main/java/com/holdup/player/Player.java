@@ -10,6 +10,10 @@ import com.holdup.card.Deck;
 public class Player implements MoneyHolder {
 	private int money;
 	private List<Card> cards;
+	public List<Card> getCards() {
+		return cards;
+	}
+
 	private Card preparedCard;
 	
 	public void draw(Deck deck) {

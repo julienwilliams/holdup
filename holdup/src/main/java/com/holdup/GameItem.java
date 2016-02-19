@@ -6,4 +6,8 @@ public abstract class GameItem {
 	public GameItem(Game game) {
 		this.game = game;
 	}
+
+	public Game getGame() {
+		return game;
+	}
 }
