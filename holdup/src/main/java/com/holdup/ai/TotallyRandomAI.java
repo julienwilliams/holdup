@@ -2,10 +2,12 @@ package com.holdup.ai;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import com.holdup.Game;
 import com.holdup.card.Card;
+import com.holdup.card.basic.DrawCard;
 import com.holdup.card.equipment.CleDuCoffreCard;
 import com.holdup.card.equipment.CouteauCard;
 import com.holdup.card.equipment.DeuxPistoletCard;
@@ -22,7 +24,17 @@ import com.holdup.player.Player;
 public class TotallyRandomAI implements AI {
 
 	public Card chooseCard(Player player) {
-		return player.getCards().get(new SecureRandom().nextInt(player.getCards().size()));
+		List<Card> cardsCopy = new ArrayList<Card>();
+		cardsCopy.addAll(player.getCards());
+		if (cardsCopy.size() >= 4) {
+			Iterator<Card> it = cardsCopy.iterator();
+			while (it.hasNext()) {
+				if (it.next() instanceof DrawCard) {
+					it.remove();
+				}
+			}
+		}
+		return cardsCopy.get(new SecureRandom().nextInt(cardsCopy.size()));
 	}
 
 	private Player getNextEligiblePlayer(Card card) {
