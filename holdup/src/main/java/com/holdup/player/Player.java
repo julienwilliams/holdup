@@ -16,9 +16,11 @@ public class Player extends GameItem implements MoneyHolder {
 	private final Role role;
 	private int money;
 	private List<Card> cards = new ArrayList<Card>();
+	private final String name;
 	
-	public Player(Game game, Role role) {
+	public Player(String name, Game game, Role role) {
 		super(game);
+		this.name = name;
 		this.role = role;
 	}
 	
@@ -57,6 +59,6 @@ public class Player extends GameItem implements MoneyHolder {
 	
 	@Override
 	public String toString() {
-		return role.getClass().getSimpleName();
+		return name + " the " + role.getClass().getSimpleName();
 	}
 }

@@ -4,7 +4,7 @@ import com.holdup.player.Player;
 
 public class Leader extends Role {
 
-	private static final int LEADER_WIN_AMOUNT = 5000;
+	private static final int LEADER_WIN_AMOUNT = 5000 ;
 
 	@Override
 	public boolean hasWon(Player player) {
