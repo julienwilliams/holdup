@@ -49,8 +49,6 @@ public class Holdup {
 			equipmentCards.add(new PorteVoixCard(game));
 			equipmentCards.add(new PorteVoixCard(game));
 			
-			
-			
 			Deck discard = new Deck(new Stack<EquipmentCard>());
 			Deck pile = new Deck(equipmentCards, discard);
 			pile.shuffle();
