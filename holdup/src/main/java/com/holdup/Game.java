@@ -12,14 +12,20 @@ public class Game {
 	private final Bank bank;
 	private final List<Player> players;
 	private final Deck deck;
+	private final Deck discardDeck;
 	private final AI ai;
-	
+	private Turn currentTurn;
 
-	public Game(Bank bank, Deck deck, AI ai, List<Player> players) {
+	public Game(Bank bank, Deck deck, Deck discardDeck, AI ai, List<Player> players) {
 		this.bank = bank;
 		this.deck = deck;
+		this.discardDeck = discardDeck;
 		this.players = players;
 		this.ai = ai;
+	}
+
+	public Deck getDiscardDeck() {
+		return discardDeck;
 	}
 
 	public Bank getBank() {
@@ -33,6 +39,10 @@ public class Game {
 	public Deck getDeck() {
 		return deck;
 	}
+	
+	public Turn getCurrentTurn() {
+		return currentTurn;
+	}
 
 	public AI getAi() {
 		return ai;
@@ -43,6 +53,7 @@ public class Game {
 		int i = 0;
 		while (!winnerFound) {
 			Turn t = new Turn(this, players.get(i % players.size()));
+			currentTurn = t;
 			t.play();
 			i++;
 		}

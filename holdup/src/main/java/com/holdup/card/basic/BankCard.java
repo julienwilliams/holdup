@@ -2,6 +2,7 @@ package com.holdup.card.basic;
 
 import com.holdup.Game;
 import com.holdup.Utils;
+import com.holdup.ai.AI;
 
 public class BankCard extends BasicCard {
 
@@ -11,7 +12,8 @@ public class BankCard extends BasicCard {
 
 	/* Take 2000 from the bank */
 	@Override
-	public void play() {
+	public void play(AI ai) {
 		Utils.TransferMoney(game.getBank(), owner, 2000);
 	}
+
 }

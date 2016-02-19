@@ -1,14 +1,11 @@
 package com.holdup.card.equipment;
 
 import com.holdup.Game;
-import com.holdup.Turn;
 import com.holdup.Utils;
 import com.holdup.ai.AI;
-import com.holdup.card.config.Configurable;
-import com.holdup.card.config.OnePlayerConfiguration;
 import com.holdup.player.Player;
 
-public class SilencerCard extends EquipmentCard implements Configurable<OnePlayerConfiguration> {
+public class SilencerCard extends EquipmentCard {
 
 	/* Silencer : steal 2000 to any player */
 	
@@ -17,19 +14,17 @@ public class SilencerCard extends EquipmentCard implements Configurable<OnePlaye
 	}
 
 	private Player target;
-	
-	@Override
-	public void configure(OnePlayerConfiguration configuration) {
-		this.target = configuration.getTarget();
-	}
-	
-	@Override
-	public void play() {
-		Utils.TransferMoney(target, owner, 2000);
-	}
 
 	@Override
-	public void aiConfigure(AI ai, Turn t) {
-		ai.configure(this, t);
+	public void play(AI ai) {
+		Utils.TransferMoney(target, owner, 2000);
+	}
+	
+	public Player getTarget() {
+		return target;
+	}
+	
+	public void setTarget(Player target) {
+		this.target = target;
 	}
 }

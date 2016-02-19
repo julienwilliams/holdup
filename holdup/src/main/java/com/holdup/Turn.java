@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.holdup.card.Card;
-import com.holdup.card.config.Configurable;
 import com.holdup.player.Player;
 
 public class Turn extends GameItem {
@@ -29,6 +28,7 @@ public class Turn extends GameItem {
 		for (Player player : game.getPlayers()) {
 			Card card = game.getAi().chooseCard(player);
 			player_card.put(player, card);
+			player.getCards().remove(card);
 		}
 
 		/* Resolve cards */
@@ -43,9 +43,7 @@ public class Turn extends GameItem {
 		for (int index : indexes) {
 			currentPlayer = players.get(index);
 			Card card = player_card.get(currentPlayer);
-			if (card instanceof Configurable<?>) {
-				((Configurable<?>)card).aiConfigure(game.getAi(), this);
-			}
+			card.play(game.getAi());
 		}
 	}
 }

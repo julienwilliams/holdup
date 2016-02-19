@@ -4,10 +4,9 @@ import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.holdup.Turn;
+import com.holdup.Game;
 import com.holdup.card.Card;
-import com.holdup.card.config.Configurable;
-import com.holdup.card.config.OnePlayerConfiguration;
+import com.holdup.card.equipment.SilencerCard;
 import com.holdup.player.Player;
 
 
@@ -20,15 +19,16 @@ public class TotallyRandomAI implements AI {
 	}
 
 	@Override
-	public void configure(Configurable<OnePlayerConfiguration> configurable, Turn t) {
+	public void configure(SilencerCard card) {
 		List<Player> eligiblePlayers = new ArrayList<Player>();
-		for (Player player : t.getGame().getPlayers()) {
-			if (player != t.getCurrentPlayer()) {
+		Game game = card.getGame();
+		for (Player player : game.getPlayers()) {
+			if (player != game.getCurrentTurn().getCurrentPlayer()) {
 				eligiblePlayers.add(player);
 			}
 		}
 		
 		Player target = eligiblePlayers.get(random.nextInt(eligiblePlayers.size()));
-		configurable.configure(new OnePlayerConfiguration(target));
+		card.setTarget(target);
 	}
 }

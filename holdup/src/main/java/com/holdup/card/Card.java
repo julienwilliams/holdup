@@ -2,6 +2,7 @@ package com.holdup.card;
 
 import com.holdup.Game;
 import com.holdup.GameItem;
+import com.holdup.ai.AI;
 import com.holdup.player.Player;
 
 public abstract class Card extends GameItem {
@@ -10,7 +11,7 @@ public abstract class Card extends GameItem {
 		super(game);
 	}
 
-	public abstract void play();
+	public abstract void play(AI ai);
 	
 	protected Player owner;
 

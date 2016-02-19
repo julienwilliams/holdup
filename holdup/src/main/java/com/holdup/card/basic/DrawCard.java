@@ -1,6 +1,7 @@
 package com.holdup.card.basic;
 
 import com.holdup.Game;
+import com.holdup.ai.AI;
 
 public class DrawCard extends BasicCard {
 
@@ -9,7 +10,7 @@ public class DrawCard extends BasicCard {
 	}
 
 	@Override
-	public void play() {
+	public void play(AI ai) {
 		owner.draw(game.getDeck());
 	}
 }

@@ -20,4 +20,8 @@ public class Deck {
 		}
 		return pickedCards;
 	}
+	
+	public void put(EquipmentCard c) {
+		cards.push(c);
+	}
 }
