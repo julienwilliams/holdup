@@ -28,60 +28,73 @@ public class TotallyRandomAI implements AI {
 		return player.getCards().get(random.nextInt(player.getCards().size()));
 	}
 
-	@Override
-	public void configure(SilencerCard card) {
+	private Player getNextEligiblePlayer(Card card) {
+		return getNextEligiblePlayer(card, new ArrayList<Player>());
+	}
+	
+	private Player getNextEligiblePlayer(Card card, Player filterPlayer) {
+		List<Player> filter = new ArrayList<Player>();
+		filter.add(filterPlayer);
+		return getNextEligiblePlayer(card, filter);
+	}
+	
+	private Player getNextEligiblePlayer(Card card, List<Player> filter) {
 		List<Player> eligiblePlayers = new ArrayList<Player>();
 		Game game = card.getGame();
 		for (Player player : game.getPlayers()) {
-			if (player != game.getCurrentTurn().getCurrentPlayer()) {
+			if (player != game.getCurrentTurn().getCurrentPlayer() && !filter.contains(player)) {
 				eligiblePlayers.add(player);
 			}
-		}
-		
-		Player target = eligiblePlayers.get(random.nextInt(eligiblePlayers.size()));
-		card.setTarget(target);
+		}		
+		return eligiblePlayers.get(random.nextInt(eligiblePlayers.size()));
+	}
+	
+	@Override
+	public void configure(SilencerCard card) {
+		card.setTarget(getNextEligiblePlayer(card));
 	}
 
 	@Override
 	public void configure(PorteVoixCard card) {
-		// TODO Auto-generated method stub
-		
+		Player target1 = getNextEligiblePlayer(card);
+		card.setTarget1(target1);
+		card.setTarget2(getNextEligiblePlayer(card, target1));
 	}
 
 	@Override
 	public void configure(PanierDePartageCard card) {
-		// TODO Auto-generated method stub
-		
+		Player target = getNextEligiblePlayer(card);
+		card.setTarget(target);
+		card.setCollector(getNextEligiblePlayer(card, target));		
 	}
 
 	@Override
 	public void configure(MatraqueCard card) {
-		// TODO Auto-generated method stub
-		
+		card.setTarget(getNextEligiblePlayer(card));		
 	}
 
 	@Override
 	public void configure(LargeBagCard card) {
-		// TODO Auto-generated method stub
-		
+		// Nothing to do		
 	}
 
 	@Override
 	public void configure(GadgetDeDistractionCard card) {
-		// TODO Auto-generated method stub
-		
+		Player target = getNextEligiblePlayer(card);
+		card.setTarget(target);
+		card.setCollector(getNextEligiblePlayer(card, target));			
 	}
 
 	@Override
 	public void configure(DeuxPistoletCard card) {
-		// TODO Auto-generated method stub
-		
+		card.setTarget(getNextEligiblePlayer(card));		
 	}
 
 	@Override
 	public void configure(CouteauCard card) {
-		// TODO Auto-generated method stub
-		
+		Player target1 = getNextEligiblePlayer(card);
+		card.setTarget1(target1);
+		card.setTarget2(getNextEligiblePlayer(card, target1));		
 	}
 
 	@Override

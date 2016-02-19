@@ -13,21 +13,21 @@ public class DeuxPistoletCard extends EquipmentCard  {
 		super(game);
 	}
 
-	private Player player;
+	private Player target;
 	
 	@Override
 	public void play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(getPlayer(), owner, 1000);
+		Utils.TransferMoney(getTarget(), owner, 1000);
 		Utils.TransferMoney(getGame().getBank(), owner, 1000);
 	}
 
-	public Player getPlayer() {
-		return player;
+	public Player getTarget() {
+		return target;
 	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
+	public void setTarget(Player target) {
+		this.target = target;
 	}
 
 }
