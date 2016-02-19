@@ -3,7 +3,6 @@ package com.holdup.card.equipment;
 import com.holdup.Game;
 import com.holdup.Utils;
 import com.holdup.ai.AI;
-import com.holdup.bank.Bank;
 import com.holdup.player.Player;
 
 public class PorteVoixCard extends EquipmentCard {
@@ -16,15 +15,14 @@ public class PorteVoixCard extends EquipmentCard {
 
 	private Player target1;
 	private Player target2;
-	private Bank collector;
 
 	
 	@Override
 	public void play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(getCollector(), owner, 2000);
-		Utils.TransferMoney(getCollector(), getTarget1(), 1000);
-		Utils.TransferMoney(getCollector(), getTarget2(), 1000);
+		Utils.TransferMoney(getGame().getBank(), owner, 2000);
+		Utils.TransferMoney(getGame().getBank(), getTarget1(), 1000);
+		Utils.TransferMoney(getGame().getBank(), getTarget2(), 1000);
 	}
 
 
@@ -48,12 +46,4 @@ public class PorteVoixCard extends EquipmentCard {
 	}
 
 
-	public Bank getCollector() {
-		return collector;
-	}
-
-
-	public void setCollector(Bank collector) {
-		this.collector = collector;
-	}
 }

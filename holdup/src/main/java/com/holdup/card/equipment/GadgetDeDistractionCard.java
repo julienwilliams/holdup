@@ -20,7 +20,27 @@ public class GadgetDeDistractionCard extends EquipmentCard {
 	@Override
 	public void play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(target, collector, 3000);
+		Utils.TransferMoney(getTarget(), getCollector(), 3000);
+	}
+
+
+	public Player getCollector() {
+		return collector;
+	}
+
+
+	public void setCollector(Player collector) {
+		this.collector = collector;
+	}
+
+
+	public Player getTarget() {
+		return target;
+	}
+
+
+	public void setTarget(Player target) {
+		this.target = target;
 	}
 
 }

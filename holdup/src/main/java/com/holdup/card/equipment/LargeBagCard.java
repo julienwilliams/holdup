@@ -3,7 +3,6 @@ package com.holdup.card.equipment;
 import com.holdup.Game;
 import com.holdup.Utils;
 import com.holdup.ai.AI;
-import com.holdup.bank.Bank;
 
 public class LargeBagCard extends EquipmentCard {
 
@@ -14,13 +13,11 @@ public class LargeBagCard extends EquipmentCard {
 		super(game);
 	}
 
-	private Bank target;
 	
 	@Override
 	public void play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(target, owner, 3000);
+		Utils.TransferMoney(getGame().getBank(), owner, 3000);
 	}
-
 
 }

@@ -20,7 +20,27 @@ public class CouteauCard extends EquipmentCard {
 	@Override
 	public void play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(target1, owner, 1000);
-		Utils.TransferMoney(target2, owner, 1000);
+		Utils.TransferMoney(getTarget1(), owner, 1000);
+		Utils.TransferMoney(getTarget2(), owner, 1000);
+	}
+
+
+	public Player getTarget1() {
+		return target1;
+	}
+
+
+	public void setTarget1(Player target1) {
+		this.target1 = target1;
+	}
+
+
+	public Player getTarget2() {
+		return target2;
+	}
+
+
+	public void setTarget2(Player target2) {
+		this.target2 = target2;
 	}
 }
