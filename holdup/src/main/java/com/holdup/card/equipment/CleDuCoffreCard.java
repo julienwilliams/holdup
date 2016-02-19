@@ -7,11 +7,12 @@ import com.holdup.Utils;
 import com.holdup.ai.AI;
 import com.holdup.player.Player;
 
-public class PiegeCard extends EquipmentCard {
+public class CleDuCoffreCard extends EquipmentCard {
 
-	/* PiegeCard : rob 2000 for each next player that played a bank card */
+
+	/* PiegeCard : Empêche les prochains joueurs de prendre un équipement. Vole 1 lingot d'or pour chaque joueur demandant des cartes équipements */
 	
-	public PiegeCard(Game game) {
+	public CleDuCoffreCard(Game game) {
 		super(game);
 	}
 
@@ -22,7 +23,7 @@ public class PiegeCard extends EquipmentCard {
 		ai.configure(this);
 		if (targets != null) {
 			for(Player target : targets) {
-				Utils.TransferMoney(target, owner, 2000);
+				Utils.TransferMoney(target, owner, 1000);
 			}
 		}
 	}
