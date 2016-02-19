@@ -1,6 +1,9 @@
 package com.holdup;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 import com.holdup.ai.AI;
 import com.holdup.bank.Bank;
@@ -9,19 +12,36 @@ import com.holdup.player.Player;
 
 public class Game {
 	
-	private final Bank bank;
-	private final List<Player> players;
-	private final Deck deck;
-	private final Deck discardDeck;
 	private final AI ai;
+
+	private Bank bank;
+	private List<Player> players;
+	private Deck deck;
+	private Deck discardDeck;
 	private Turn currentTurn;
 
-	public Game(Bank bank, Deck deck, Deck discardDeck, AI ai, List<Player> players) {
-		this.bank = bank;
-		this.deck = deck;
-		this.discardDeck = discardDeck;
-		this.players = players;
+	public Game(AI ai) {
 		this.ai = ai;
+	}
+	
+	public void setBank(Bank bank) {
+		this.bank = bank;
+	}
+
+	public void setPlayers(List<Player> players) {
+		this.players = players;
+	}
+
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+
+	public void setDiscardDeck(Deck discardDeck) {
+		this.discardDeck = discardDeck;
+	}
+
+	public void setCurrentTurn(Turn currentTurn) {
+		this.currentTurn = currentTurn;
 	}
 
 	public Deck getDiscardDeck() {
@@ -49,13 +69,23 @@ public class Game {
 	}
 	
 	void play() {
-		boolean winnerFound = false;
+		List<Player> winners = new ArrayList<Player>();
 		int i = 0;
-		while (!winnerFound) {
+		while (winners.isEmpty()) {
 			Turn t = new Turn(this, players.get(i % players.size()));
 			currentTurn = t;
 			t.play();
 			i++;
+			
+			/* Evaluate winner(s) */
+			for (Player player : players) {
+				if (player.hasWon()) {
+					winners.add(player);
+				}
+			}
 		}
+		
+		System.out.println("Winner(s) : " + StringUtils.join(winners, " | "));
+		System.out.println("Number of turns : " + i);
 	}
 }

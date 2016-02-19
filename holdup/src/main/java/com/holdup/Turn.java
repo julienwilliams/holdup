@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.holdup.card.Card;
+import com.holdup.card.equipment.EquipmentCard;
 import com.holdup.player.Player;
 
 public class Turn extends GameItem {
@@ -28,7 +29,10 @@ public class Turn extends GameItem {
 		for (Player player : game.getPlayers()) {
 			Card card = game.getAi().chooseCard(player);
 			player_card.put(player, card);
-			player.getCards().remove(card);
+			
+			if (card instanceof EquipmentCard) {
+				player.getCards().remove(card);
+			}
 		}
 
 		/* Resolve cards */

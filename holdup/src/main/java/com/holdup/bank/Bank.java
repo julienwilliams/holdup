@@ -13,17 +13,14 @@ public class Bank implements MoneyHolder {
 		return money;
 	}
 	
-	@Override
 	public int getAmount() {
 		return money;
 	}
 
-	@Override
 	public void add(int money) {
 		this.money += money;
 	}
 
-	@Override
 	public void substract(int money) {
 		this.money -= money;
 	}

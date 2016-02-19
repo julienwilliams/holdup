@@ -17,6 +17,7 @@ public class SilencerCard extends EquipmentCard {
 
 	@Override
 	public void play(AI ai) {
+		ai.configure(this);
 		Utils.TransferMoney(target, owner, 2000);
 	}
 	

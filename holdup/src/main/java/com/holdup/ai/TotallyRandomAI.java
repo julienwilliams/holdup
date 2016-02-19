@@ -13,12 +13,10 @@ import com.holdup.player.Player;
 public class TotallyRandomAI implements AI {
 	private final SecureRandom random = new SecureRandom();
 
-	@Override
 	public Card chooseCard(Player player) {
 		return player.getCards().get(random.nextInt(player.getCards().size()));
 	}
 
-	@Override
 	public void configure(SilencerCard card) {
 		List<Player> eligiblePlayers = new ArrayList<Player>();
 		Game game = card.getGame();
