@@ -6,6 +6,13 @@ import java.util.List;
 
 import com.holdup.Game;
 import com.holdup.card.Card;
+import com.holdup.card.equipment.CouteauCard;
+import com.holdup.card.equipment.DeuxPistoletCard;
+import com.holdup.card.equipment.GadgetDeDistractionCard;
+import com.holdup.card.equipment.LargeBagCard;
+import com.holdup.card.equipment.MatraqueCard;
+import com.holdup.card.equipment.PanierDePartageCard;
+import com.holdup.card.equipment.PorteVoixCard;
 import com.holdup.card.equipment.SilencerCard;
 import com.holdup.player.Player;
 
@@ -31,4 +38,47 @@ public class TotallyRandomAI implements AI {
 		Player target = eligiblePlayers.get(random.nextInt(eligiblePlayers.size()));
 		card.setTarget(target);
 	}
+
+	@Override
+	public void configure(PorteVoixCard card) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configure(PanierDePartageCard card) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configure(MatraqueCard card) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configure(LargeBagCard card) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configure(GadgetDeDistractionCard card) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configure(DeuxPistoletCard card) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void configure(CouteauCard card) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
