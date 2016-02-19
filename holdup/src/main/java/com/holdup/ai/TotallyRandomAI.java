@@ -67,10 +67,6 @@ public class TotallyRandomAI implements AI {
 		card.setTarget(getNextEligiblePlayer(card));		
 	}
 
-	public void configure(LargeBagCard card) {
-		// Nothing to do		
-	}
-
 	public void configure(GadgetDeDistractionCard card) {
 		Player target = getNextEligiblePlayer(card);
 		card.setTarget(target);

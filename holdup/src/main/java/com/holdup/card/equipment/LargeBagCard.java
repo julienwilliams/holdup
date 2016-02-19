@@ -12,11 +12,9 @@ public class LargeBagCard extends EquipmentCard {
 	public LargeBagCard(Game game) {
 		super(game);
 	}
-
 	
 	@Override
 	public void play(AI ai) {
-		ai.configure(this);
 		Utils.TransferMoney(getGame().getBank(), owner, 3000);
 	}
 
