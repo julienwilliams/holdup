@@ -32,6 +32,7 @@ public class Turn extends GameItem {
 			
 			if (card instanceof EquipmentCard) {
 				player.getCards().remove(card);
+				game.getDiscardDeck().put((EquipmentCard)card);
 			}
 		}
 

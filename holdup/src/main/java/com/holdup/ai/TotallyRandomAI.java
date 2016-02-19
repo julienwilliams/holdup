@@ -10,7 +10,6 @@ import com.holdup.card.equipment.CleDuCoffreCard;
 import com.holdup.card.equipment.CouteauCard;
 import com.holdup.card.equipment.DeuxPistoletCard;
 import com.holdup.card.equipment.GadgetDeDistractionCard;
-import com.holdup.card.equipment.LargeBagCard;
 import com.holdup.card.equipment.MatraqueCard;
 import com.holdup.card.equipment.PanierDePartageCard;
 import com.holdup.card.equipment.PiegeCard;

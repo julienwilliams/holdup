@@ -31,15 +31,22 @@ public class Holdup {
 			Bank bank = new Bank(26000);
 			
 			Stack<EquipmentCard> equipmentCards = new Stack<EquipmentCard>();
-			for (int j=0; j<50; i++) {
+			for (int j=0; j<10; j++) {
 				equipmentCards.add(new SilencerCard(game));
 			}
 			equipmentCards.add(new CouteauCard(game));
+			equipmentCards.add(new CouteauCard(game));
+			equipmentCards.add(new DeuxPistoletCard(game));
 			equipmentCards.add(new DeuxPistoletCard(game));
 			equipmentCards.add(new GadgetDeDistractionCard(game));
+			equipmentCards.add(new GadgetDeDistractionCard(game));
+			equipmentCards.add(new MatraqueCard(game));
 			equipmentCards.add(new MatraqueCard(game));
 			equipmentCards.add(new LargeBagCard(game));
+			equipmentCards.add(new LargeBagCard(game));
 			equipmentCards.add(new PanierDePartageCard(game));
+			equipmentCards.add(new PanierDePartageCard(game));
+			equipmentCards.add(new PorteVoixCard(game));
 			equipmentCards.add(new PorteVoixCard(game));
 			
 			
