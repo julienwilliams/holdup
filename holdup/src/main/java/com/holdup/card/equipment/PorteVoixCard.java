@@ -45,5 +45,8 @@ public class PorteVoixCard extends EquipmentCard {
 		this.target2 = target2;
 	}
 
-
+	@Override
+	public String toString() {
+		return "Porte Voix";
+	}
 }

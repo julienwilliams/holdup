@@ -18,4 +18,8 @@ public class LargeBagCard extends EquipmentCard {
 		Utils.TransferMoney(getGame().getBank(), owner, 3000);
 	}
 
+	@Override
+	public String toString() {
+		return "Large Bag";
+	}
 }

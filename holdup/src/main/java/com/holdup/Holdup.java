@@ -24,9 +24,9 @@ import com.holdup.player.role.Leader;
 
 public class Holdup {
 	public static void main(String[] args) {
+		Statistics statistics = new Statistics();
 		
-
-		for (int i=0;i<50;i++) {
+		for (int i=0;i<1000;i++) {
 			Game game = new Game(new TotallyRandomAI());
 			Bank bank = new Bank(26000);
 			
@@ -85,8 +85,8 @@ public class Holdup {
 			game.setBank(bank);
 			game.setPlayers(Arrays.asList(new Player[] {playerAccomplice1, playerAccomplice2, playerLeader, playerCoyote}));
 			
-			game.play();
+			statistics.add(game.play());
 		}
-
+		statistics.showStats();
 	}
 }

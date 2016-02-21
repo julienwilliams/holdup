@@ -28,4 +28,9 @@ public class SilencerCard extends EquipmentCard {
 	public void setTarget(Player target) {
 		this.target = target;
 	}
+	
+	@Override
+	public String toString() {
+		return "Silencieux";
+	}
 }

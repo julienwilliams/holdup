@@ -4,7 +4,7 @@ import com.holdup.player.Player;
 
 public class Coyote extends Role {
 
-	private static final int COYOTE_WIN_AMOUNT = 8000;
+	private static final int COYOTE_WIN_AMOUNT = 9000;
 
 	public Coyote() {
 	}
@@ -13,4 +13,8 @@ public class Coyote extends Role {
 		return player.getAmount() >= COYOTE_WIN_AMOUNT;
 	}
 
+	@Override
+	public String toString() {
+		return "Coyote";
+	}
 }

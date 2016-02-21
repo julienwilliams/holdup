@@ -38,4 +38,8 @@ public class PanierDePartageCard extends EquipmentCard {
 		this.target = target;
 	}
 
+	@Override
+	public String toString() {
+		return "Panier de Partage";
+	}
 }

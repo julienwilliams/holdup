@@ -43,4 +43,8 @@ public class GadgetDeDistractionCard extends EquipmentCard {
 		this.target = target;
 	}
 
+	@Override
+	public String toString() {
+		return "Gadget De Distraction";
+	}
 }

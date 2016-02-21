@@ -14,4 +14,9 @@ public class DrawCard extends BasicCard {
 	public void play(AI ai) {
 		owner.draw(game.getDeck(), Rules.NUMBER_OF_CARDS_PICKED);
 	}
+	
+	@Override
+	public String toString() {
+		return "Pige Equipement";
+	}
 }

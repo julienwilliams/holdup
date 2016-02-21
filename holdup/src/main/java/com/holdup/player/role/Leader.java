@@ -18,4 +18,8 @@ public class Leader extends Role {
 		return won;
 	}
 
+	@Override
+	public String toString() {
+		return "Leader";
+	}
 }

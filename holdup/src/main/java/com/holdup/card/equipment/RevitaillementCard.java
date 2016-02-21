@@ -16,4 +16,8 @@ public class RevitaillementCard extends EquipmentCard {
 		ai.configure(this);
 	}
 	
+	@Override
+	public String toString() {
+		return "Revitaillement";
+	}
 }

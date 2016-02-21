@@ -16,4 +16,8 @@ public class BankCard extends BasicCard {
 		Utils.TransferMoney(game.getBank(), owner, 2000);
 	}
 
+	@Override
+	public String toString() {
+		return "Banque";
+	}
 }

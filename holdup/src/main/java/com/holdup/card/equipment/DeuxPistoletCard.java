@@ -30,4 +30,8 @@ public class DeuxPistoletCard extends EquipmentCard  {
 		this.target = target;
 	}
 
+	@Override
+	public String toString() {
+		return "Deux Pistolets";
+	}
 }

@@ -68,24 +68,28 @@ public class Game {
 		return ai;
 	}
 	
-	void play() {
+	GameHistory play() {
 		List<Player> winners = new ArrayList<Player>();
 		int i = 0;
+		GameHistory history = new GameHistory();
 		while (winners.isEmpty()) {
 			Turn t = new Turn(this, players.get(i % players.size()));
 			currentTurn = t;
 			t.play();
-			i++;
-			
+						
 			/* Evaluate winner(s) */
 			for (Player player : players) {
 				if (player.hasWon()) {
 					winners.add(player);
 				}
 			}
+			history.addTurn(t);
+			i++;
 		}
-		
-		System.out.println("Winner(s) : " + StringUtils.join(winners, " | "));
-		System.out.println("Number of turns : " + i);
+
+		history.setWinners(winners);
+		history.setTurnCount(i);
+		return history;
 	}
+
 }

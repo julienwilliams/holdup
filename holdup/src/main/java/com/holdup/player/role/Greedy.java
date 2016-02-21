@@ -8,4 +8,8 @@ public class Greedy extends Role {
 		return player.getGame().getBank().getAmount() == 0;
 	}
 
+	@Override
+	public String toString() {
+		return "Greedy";
+	}
 }

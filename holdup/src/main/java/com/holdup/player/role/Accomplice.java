@@ -21,4 +21,9 @@ public class Accomplice extends Role {
 	public boolean hasWon(Player player) {
 		return accomplice == null ? player.getAmount() >= SOLO_WIN_AMOUNT : (player.getAmount() + accomplice.getAmount()) >= ACCOMPLICE_WIN_AMOUNT;
 	}
+	
+	@Override
+	public String toString() {
+		return "Accomplice";
+	}
 }

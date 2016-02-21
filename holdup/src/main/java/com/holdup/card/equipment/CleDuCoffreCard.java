@@ -35,4 +35,9 @@ public class CleDuCoffreCard extends EquipmentCard {
 	public void setTarget(Set<Player> targets) {
 		this.targets = targets;
 	}
+	
+	@Override
+	public String toString() {
+		return "Clé du Coffre d'Équipement";
+	}
 }

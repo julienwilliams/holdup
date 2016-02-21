@@ -57,6 +57,10 @@ public class Player extends GameItem implements MoneyHolder {
 		return role.hasWon(this);
 	}
 	
+	public Role getRole() {
+		return role;
+	}
+	
 	@Override
 	public String toString() {
 		return name + " the " + role.getClass().getSimpleName();

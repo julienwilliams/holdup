@@ -51,4 +51,28 @@ public class Turn extends GameItem {
 			card.play(game.getAi());
 		}
 	}
+	
+	public Map<Player, Card> getPlayedCards() {
+		return player_card;
+	}
+	
+	@Override
+	public String toString() {
+		String result = "";
+		/* Resolve cards */
+		List<Player> players = game.getPlayers();
+		int i = players.indexOf(firstPlayer);
+		int[] indexes = new int[players.size()];
+		for (int j=0;j<players.size();j++) {
+			indexes[j] = i % players.size();
+			i++;
+		}
+		
+		for (int index : indexes) {
+			currentPlayer = players.get(index);
+			Card card = player_card.get(currentPlayer);
+			result += currentPlayer + " played " + card + "(" + currentPlayer.getAmount() + ") | ";
+		}
+		return result;
+	}
 }

@@ -43,4 +43,9 @@ public class CouteauCard extends EquipmentCard {
 	public void setTarget2(Player target2) {
 		this.target2 = target2;
 	}
+	
+	@Override
+	public String toString() {
+		return "Couteau";
+	}
 }

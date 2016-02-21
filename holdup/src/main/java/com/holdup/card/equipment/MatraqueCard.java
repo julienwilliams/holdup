@@ -32,4 +32,8 @@ public class MatraqueCard extends EquipmentCard {
 		this.target = target;
 	}
 
+	@Override
+	public String toString() {
+		return "Matraque";
+	}
 }
