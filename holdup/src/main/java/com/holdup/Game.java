@@ -3,8 +3,6 @@ package com.holdup;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringUtils;
-
 import com.holdup.ai.AI;
 import com.holdup.bank.Bank;
 import com.holdup.card.Deck;

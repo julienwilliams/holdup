@@ -57,6 +57,7 @@ public class Holdup {
 			Accomplice accomplice2 = new Accomplice();
 			Coyote coyote = new Coyote();
 			Leader leader = new Leader();
+			//Greedy leader = new Greedy();
 			
 			Player playerAccomplice1 = new Player("Jacques", game, accomplice1);
 			Player playerAccomplice2 = new Player("Gilles", game, accomplice2);

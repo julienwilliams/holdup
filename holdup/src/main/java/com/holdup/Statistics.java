@@ -16,6 +16,7 @@ public class Statistics {
 	private static final boolean ENABLE_DETAILS = true;
 	List<GameHistory> gameResults = new ArrayList<GameHistory>();
 	Map<String, Integer> roleWon = new HashMap<String, Integer>();
+	int totalTurns;
 	
 	public Statistics() {
 	}
@@ -26,14 +27,14 @@ public class Statistics {
 	
 	public void showStats() {
 		for (GameHistory history : gameResults) {
-			System.out.println("----------------------------------------------------------------------");
-			System.out.println("Winner(s) : " + StringUtils.join(history.getWinners(), " | "));
-			System.out.println("Number of turns : " + history.getTurnCount());
-			if (ENABLE_DETAILS) printDetails(history);
-			
+			if (ENABLE_DETAILS) {
+				System.out.println("Winner(s) : " + StringUtils.join(history.getWinners(), " | "));
+				System.out.println("Number of turns : " + history.getTurnCount());
+				printDetails(history);
+				System.out.println("----------------------------------------------------------------------");
+			}
 			addWinnerRoleCount(history);
 		}
-		System.out.println("----------------------------------------------------------------------");
 		printWinPercentage();
 		
 	}
@@ -43,6 +44,7 @@ public class Statistics {
 		for (Map.Entry<String, Integer> entry : roleWon.entrySet()) {
 			System.out.println(entry.getKey() + ": " + entry.getValue() + " wins (" + (entry.getValue() * 100 / (double)gameResults.size()) + "%)");
 		}
+		System.out.println("Average Number of turns: " + (totalTurns/gameResults.size()));
 	}
 	
 	public void addWinnerRoleCount(GameHistory history) {
@@ -59,6 +61,7 @@ public class Statistics {
 				roleWon.put(role.toString(), 1);
 			}
 		}
+		totalTurns += history.getTurnCount();
 	}
 	
 	private void printDetails(GameHistory history) {
