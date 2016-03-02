@@ -2,7 +2,7 @@ package com.holdup.bank;
 
 import com.holdup.MoneyHolder;
 
-public class Bank implements MoneyHolder {
+public class Bank implements MoneyHolder, Cloneable {
 	private int money;
 
 	public Bank(int money) {

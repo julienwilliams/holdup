@@ -8,7 +8,7 @@ import com.holdup.card.Card;
 import com.holdup.card.equipment.EquipmentCard;
 import com.holdup.player.Player;
 
-public class Turn extends GameItem {
+public class Turn extends GameItem implements Cloneable {
 	
 	public Player getCurrentPlayer() {
 		return currentPlayer;

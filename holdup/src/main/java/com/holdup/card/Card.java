@@ -5,7 +5,7 @@ import com.holdup.GameItem;
 import com.holdup.ai.AI;
 import com.holdup.player.Player;
 
-public abstract class Card extends GameItem {
+public abstract class Card extends GameItem implements Cloneable {
 	
 	public Card(Game game) {
 		super(game);

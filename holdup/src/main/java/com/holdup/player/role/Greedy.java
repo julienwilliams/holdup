@@ -1,5 +1,6 @@
 package com.holdup.player.role;
 
+import com.holdup.Rules;
 import com.holdup.player.Player;
 
 public class Greedy extends Role {
@@ -11,5 +12,10 @@ public class Greedy extends Role {
 	@Override
 	public String toString() {
 		return "Greedy";
+	}
+
+	@Override
+	protected float getWinConditionPct(Player player) {
+		return 1.0f - (float)player.getGame().getBank().getAmount() / Rules.TOTAL_AVAILABLE_MONEY;
 	}
 }

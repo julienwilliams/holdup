@@ -22,4 +22,14 @@ public class Leader extends Role {
 	public String toString() {
 		return "Leader";
 	}
+
+	@Override
+	protected float getWinConditionPct(Player player) {
+		float accWinPct = 0.0f;
+		for (Player p : player.getGame().getPlayers()) {
+			accWinPct += Math.max((float)p.getAmount() / LEADER_WIN_AMOUNT, 1.0f);
+		}
+		
+		return (float)accWinPct / player.getGame().getPlayers().size();
+	}
 }

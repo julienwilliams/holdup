@@ -3,7 +3,7 @@ package com.holdup;
 import java.util.Arrays;
 import java.util.Stack;
 
-import com.holdup.ai.TotallyRandomAI;
+import com.holdup.ai.SoSoAI;
 import com.holdup.bank.Bank;
 import com.holdup.card.Deck;
 import com.holdup.card.basic.BankCard;
@@ -18,17 +18,17 @@ import com.holdup.card.equipment.PanierDePartageCard;
 import com.holdup.card.equipment.PorteVoixCard;
 import com.holdup.card.equipment.SilencerCard;
 import com.holdup.player.Player;
-import com.holdup.player.role.Accomplice;
 import com.holdup.player.role.Coyote;
+import com.holdup.player.role.Greedy;
 import com.holdup.player.role.Leader;
 
 public class Holdup {
 	public static void main(String[] args) {
 		Statistics statistics = new Statistics();
 		
-		for (int i=0;i<1000;i++) {
-			Game game = new Game(new TotallyRandomAI());
-			Bank bank = new Bank(26000);
+		for (int i=0;i<5;i++) {
+			Game game = new Game(new SoSoAI());
+			Bank bank = new Bank(Rules.BANK_STARTING_MONEY);
 			
 			Stack<EquipmentCard> equipmentCards = new Stack<EquipmentCard>();
 			for (int j=0; j<10; j++) {
@@ -53,38 +53,39 @@ public class Holdup {
 			Deck pile = new Deck(equipmentCards, discard);
 			pile.shuffle();
 	
-			Accomplice accomplice1 = new Accomplice();
-			Accomplice accomplice2 = new Accomplice();
+//			Accomplice accomplice1 = new Accomplice();
+//			Accomplice accomplice2 = new Accomplice();
 			Coyote coyote = new Coyote();
+			Coyote coyote2 = new Coyote();
 			Leader leader = new Leader();
-			//Greedy leader = new Greedy();
+			Greedy greedy = new Greedy();
 			
-			Player playerAccomplice1 = new Player("Jacques", game, accomplice1);
-			Player playerAccomplice2 = new Player("Gilles", game, accomplice2);
+			Player playerGreedy = new Player("Jacques", game, greedy);
 			Player playerLeader = new Player("Paul", game, leader);
 			Player playerCoyote = new Player("Roger", game, coyote);
+			Player playerCoyote2 = new Player("Gilles", game, coyote2);
 			
-			playerAccomplice1.draw(pile, Rules.NUMBER_OF_EQUIPMENT_CARDS_PICKED_AT_START);
-			playerAccomplice2.draw(pile, Rules.NUMBER_OF_EQUIPMENT_CARDS_PICKED_AT_START);
+			playerGreedy.draw(pile, Rules.NUMBER_OF_EQUIPMENT_CARDS_PICKED_AT_START);
 			playerLeader.draw(pile, Rules.NUMBER_OF_EQUIPMENT_CARDS_PICKED_AT_START);
 			playerCoyote.draw(pile, Rules.NUMBER_OF_EQUIPMENT_CARDS_PICKED_AT_START);
+			playerCoyote2.draw(pile, Rules.NUMBER_OF_EQUIPMENT_CARDS_PICKED_AT_START);
 			
-			playerAccomplice1.draw(new BankCard(game));
-			playerAccomplice1.draw(new DrawCard(game));
-			playerAccomplice2.draw(new BankCard(game));
-			playerAccomplice2.draw(new DrawCard(game));
+			playerGreedy.draw(new BankCard(game));
+			playerGreedy.draw(new DrawCard(game));
 			playerLeader.draw(new BankCard(game));
 			playerLeader.draw(new DrawCard(game));
 			playerCoyote.draw(new BankCard(game));
 			playerCoyote.draw(new DrawCard(game));
+			playerCoyote2.draw(new BankCard(game));
+			playerCoyote2.draw(new DrawCard(game));
 			
-			accomplice1.setAccomplice(playerAccomplice2);
-			accomplice2.setAccomplice(playerAccomplice1);
+//			accomplice1.setAccomplice(playerAccomplice2);
+//			accomplice2.setAccomplice(playerAccomplice1);
 			
 			game.setDeck(pile);
 			game.setDiscardDeck(discard);
 			game.setBank(bank);
-			game.setPlayers(Arrays.asList(new Player[] {playerAccomplice1, playerAccomplice2, playerLeader, playerCoyote}));
+			game.setPlayers(Arrays.asList(new Player[] {playerGreedy, playerCoyote2, playerLeader, playerCoyote}));
 			
 			statistics.add(game.play());
 		}

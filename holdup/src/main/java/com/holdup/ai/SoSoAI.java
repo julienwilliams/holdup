@@ -2,12 +2,10 @@ package com.holdup.ai;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import com.holdup.Game;
 import com.holdup.card.Card;
-import com.holdup.card.basic.DrawCard;
 import com.holdup.card.equipment.CleDuCoffreCard;
 import com.holdup.card.equipment.CouteauCard;
 import com.holdup.card.equipment.DeuxPistoletCard;
@@ -19,22 +17,50 @@ import com.holdup.card.equipment.PorteVoixCard;
 import com.holdup.card.equipment.RevitaillementCard;
 import com.holdup.card.equipment.SilencerCard;
 import com.holdup.player.Player;
+import com.rits.cloning.Cloner;
 
 
-public class TotallyRandomAI implements AI {
+public class SoSoAI implements AI {
 
-	public Card chooseCard(Player player) {
-		List<Card> cardsCopy = new ArrayList<Card>();
-		cardsCopy.addAll(player.getCards());
-		if (cardsCopy.size() >= 4) {
-			Iterator<Card> it = cardsCopy.iterator();
-			while (it.hasNext()) {
-				if (it.next() instanceof DrawCard) {
-					it.remove();
-				}
+	
+	static Player findPlayer(Game game, String name) {
+		for (Player p : game.getPlayers()) {
+			if (p.getName().equals(name)) {
+				return p;
 			}
 		}
-		return cardsCopy.get(new SecureRandom().nextInt(cardsCopy.size()));
+		
+		return null;
+	}
+
+	static Card findCard(Player player, Class<?> cardClass) {
+		for (Card c : player.getCards()) {
+			if (c.getClass().equals(cardClass) ) {
+				return c;
+			}
+		}
+		
+		return null;
+	}
+	
+	// The cloning BS can be replaced by play / unplay each card while evaluating - MUCH FASTER!
+	public Card chooseCard(Player player) {
+		float maxEval = 0.0f;
+		Card chosenCard = null;
+		for (Card c : player.getCards()) {
+			Game clonedGame = new Cloner().deepClone(player.getGame());
+			
+			Player clonedPlayer = findPlayer(clonedGame, player.getName());
+			Card clonedCard = findCard(clonedPlayer, c.getClass());
+			
+			clonedCard.play(this);
+			float eval = clonedPlayer.getRole().evaluate(clonedPlayer);
+			if (eval >= maxEval) {
+				chosenCard = c;
+			}
+		}
+		
+		return chosenCard;
 	}
 
 	private Player getNextEligiblePlayer(Card card) {

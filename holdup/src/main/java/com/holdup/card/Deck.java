@@ -7,7 +7,7 @@ import java.util.Stack;
 
 import com.holdup.card.equipment.EquipmentCard;
 
-public class Deck {
+public class Deck implements Cloneable {
 	private final Stack<EquipmentCard> cards;
 	private Deck discard;
 	

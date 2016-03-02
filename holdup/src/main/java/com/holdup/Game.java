@@ -8,7 +8,7 @@ import com.holdup.bank.Bank;
 import com.holdup.card.Deck;
 import com.holdup.player.Player;
 
-public class Game {
+public class Game implements Cloneable {
 	
 	private final AI ai;
 

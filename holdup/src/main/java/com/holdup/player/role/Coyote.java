@@ -17,4 +17,9 @@ public class Coyote extends Role {
 	public String toString() {
 		return "Coyote";
 	}
+
+	@Override
+	protected float getWinConditionPct(Player player) {
+		return (float)player.getAmount() / (float)COYOTE_WIN_AMOUNT;
+	}
 }

@@ -4,8 +4,8 @@ import com.holdup.player.Player;
 
 public class Accomplice extends Role {
 
-	private static final int SOLO_WIN_AMOUNT = 8000;
-	private static final int ACCOMPLICE_WIN_AMOUNT = 14000;
+	private static final int SOLO_WIN_AMOUNT = 9000;
+	private static final int ACCOMPLICE_WIN_AMOUNT = 15000;
 	
 	private Player accomplice;
 
@@ -25,5 +25,10 @@ public class Accomplice extends Role {
 	@Override
 	public String toString() {
 		return "Accomplice";
+	}
+
+	@Override
+	protected float getWinConditionPct(Player player) {
+		return 0;
 	}
 }

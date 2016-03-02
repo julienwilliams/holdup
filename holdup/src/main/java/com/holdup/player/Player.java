@@ -11,10 +11,14 @@ import com.holdup.card.Deck;
 import com.holdup.card.equipment.EquipmentCard;
 import com.holdup.player.role.Role;
 
-public class Player extends GameItem implements MoneyHolder {
+public class Player extends GameItem implements MoneyHolder, Cloneable {
 	
+	public String getName() {
+		return name;
+	}
+
 	private final Role role;
-	private int money;
+	private int money = 2000;
 	private List<Card> cards = new ArrayList<Card>();
 	private final String name;
 	
