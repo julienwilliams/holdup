@@ -8,7 +8,7 @@ import com.holdup.bank.Bank;
 import com.holdup.card.Deck;
 import com.holdup.player.Player;
 
-public class Game implements Cloneable {
+public class Game {
 	
 	private final AI ai;
 
@@ -69,7 +69,7 @@ public class Game implements Cloneable {
 	GameHistory play() {
 		List<Player> winners = new ArrayList<Player>();
 		int i = 0;
-		GameHistory history = new GameHistory();
+		GameHistory history = new GameHistory(this);
 		while (winners.isEmpty()) {
 			Turn t = new Turn(this, players.get(i % players.size()));
 			currentTurn = t;

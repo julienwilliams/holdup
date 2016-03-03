@@ -5,22 +5,20 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Stack;
 
-import com.holdup.card.equipment.EquipmentCard;
-
-public class Deck implements Cloneable {
-	private final Stack<EquipmentCard> cards;
+public class Deck {
+	private final Stack<Card> cards;
 	private Deck discard;
 	
-	public Deck(Stack<EquipmentCard> cards) {
+	public Deck(Stack<Card> cards) {
 		this.cards = cards;
 	}
 	
-	public Deck(Stack<EquipmentCard> cards, Deck discard) {
+	public Deck(Stack<Card> cards, Deck discard) {
 		this.cards = cards;
 		this.discard = discard;
 	}
 	
-	public Stack<EquipmentCard> getCards() {
+	public Stack<Card> getCards() {
 		return cards;
 	}
 	
@@ -28,20 +26,20 @@ public class Deck implements Cloneable {
 		Collections.shuffle(cards);
 	}
 	
-	public List<EquipmentCard> pick(int nbCards) {
+	public List<Card> pick(int nbCards) {
 		if (discard != null && cards.size() < nbCards ) {
 			discard.shuffle();
 			cards.addAll(discard.getCards());
 			discard.getCards().clear();
 		}
-		List<EquipmentCard> pickedCards = new ArrayList<EquipmentCard>(2);
+		List<Card> pickedCards = new ArrayList<Card>(nbCards);
 		for (int i=0; i<nbCards;i++) {
 			pickedCards.add(cards.pop());
 		}
 		return pickedCards;
 	}
 	
-	public void put(EquipmentCard c) {
+	public void put(Card c) {
 		cards.push(c);
 	}
 }

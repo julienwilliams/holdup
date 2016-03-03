@@ -13,7 +13,7 @@ import com.holdup.player.Player;
 
 
 public class Statistics {
-	private static final boolean ENABLE_DETAILS = true;
+	private static final boolean ENABLE_DETAILS = false;
 	List<GameHistory> gameResults = new ArrayList<GameHistory>();
 	Map<String, Integer> roleWon = new HashMap<String, Integer>();
 	int totalTurns;
@@ -70,5 +70,16 @@ public class Statistics {
 			i++;
 			System.out.println("Details (turn " + i + "): " + t);
 		}
+		
+		StringBuilder sb = new StringBuilder();
+		for (Player p : history.getGame().getPlayers()) {
+			sb.append(p);
+			sb.append(" (");
+			sb.append(p.getAmount());
+			sb.append(")");
+			sb.append(" | ");
+		}
+		
+		System.out.println("Game End: " + sb.toString());
 	}
 }

@@ -1,13 +1,15 @@
 package com.holdup.card.equipment;
 
 import com.holdup.Game;
-import com.holdup.Utils;
 import com.holdup.ai.AI;
+import com.holdup.card.Card;
+import com.holdup.card.action.Action;
+import com.holdup.card.action.MoneyTransfer;
 import com.holdup.player.Player;
 
-public class PanierDePartageCard extends EquipmentCard {
+public class PanierDePartageCard extends Card {
 
-	/* Panier de partage : vole 2000 d'un joueur et le donne à un autre joueur */
+	private final static int CARD_AMOUNT = 2000;
 	
 	public PanierDePartageCard(Game game) {
 		super(game);
@@ -17,9 +19,9 @@ public class PanierDePartageCard extends EquipmentCard {
 	private Player target;
 
 	@Override
-	public void play(AI ai) {
+	public Action play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(getTarget(), getCollector(), 2000);
+		return MoneyTransfer.create(target, collector, CARD_AMOUNT);
 	}
 
 	public Player getCollector() {
@@ -40,6 +42,6 @@ public class PanierDePartageCard extends EquipmentCard {
 
 	@Override
 	public String toString() {
-		return "Panier de Partage";
+		return "Panier de Partage (from: " + getTarget() + " to " + getCollector() + ")";
 	}
 }

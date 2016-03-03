@@ -1,6 +1,6 @@
 package com.holdup;
 
-public abstract class GameItem implements Cloneable {
+public abstract class GameItem {
 	protected final Game game;
 
 	public GameItem(Game game) {

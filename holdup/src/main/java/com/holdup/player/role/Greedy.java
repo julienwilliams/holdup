@@ -16,6 +16,6 @@ public class Greedy extends Role {
 
 	@Override
 	protected float getWinConditionPct(Player player) {
-		return 1.0f - (float)player.getGame().getBank().getAmount() / Rules.TOTAL_AVAILABLE_MONEY;
+		return 1.0f - ((float)player.getGame().getBank().getAmount() / (float)Rules.TOTAL_BANK_MONEY);
 	}
 }

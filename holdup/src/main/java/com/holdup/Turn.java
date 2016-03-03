@@ -5,10 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 import com.holdup.card.Card;
-import com.holdup.card.equipment.EquipmentCard;
+import com.holdup.card.action.Action;
 import com.holdup.player.Player;
 
-public class Turn extends GameItem implements Cloneable {
+public class Turn extends GameItem {
 	
 	public Player getCurrentPlayer() {
 		return currentPlayer;
@@ -29,11 +29,9 @@ public class Turn extends GameItem implements Cloneable {
 		for (Player player : game.getPlayers()) {
 			Card card = game.getAi().chooseCard(player);
 			player_card.put(player, card);
-			
-			if (card instanceof EquipmentCard) {
-				player.getCards().remove(card);
-				game.getDiscardDeck().put((EquipmentCard)card);
-			}
+			player.getCards().remove(card);
+			game.getDiscardDeck().put(card);
+			player.draw(game.getDeck(), Rules.NUMBER_OF_CARDS_PICKED_EACH_TURN);
 		}
 
 		/* Resolve cards */
@@ -48,7 +46,8 @@ public class Turn extends GameItem implements Cloneable {
 		for (int index : indexes) {
 			currentPlayer = players.get(index);
 			Card card = player_card.get(currentPlayer);
-			card.play(game.getAi());
+			Action play = card.play(game.getAi());
+			play.doo();
 		}
 	}
 	
@@ -71,7 +70,7 @@ public class Turn extends GameItem implements Cloneable {
 		for (int index : indexes) {
 			currentPlayer = players.get(index);
 			Card card = player_card.get(currentPlayer);
-			result += currentPlayer + " played " + card + "(" + currentPlayer.getAmount() + ") | ";
+			result += currentPlayer + " played " + card + " | ";
 		}
 		return result;
 	}

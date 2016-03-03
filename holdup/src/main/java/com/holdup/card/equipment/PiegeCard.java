@@ -3,11 +3,12 @@ package com.holdup.card.equipment;
 import java.util.Set;
 
 import com.holdup.Game;
-import com.holdup.Utils;
 import com.holdup.ai.AI;
+import com.holdup.card.Card;
+import com.holdup.card.action.Action;
 import com.holdup.player.Player;
 
-public class PiegeCard extends EquipmentCard {
+public class PiegeCard extends Card {
 
 	/* PiegeCard : rob 2000 for each next player that played a bank card */
 	
@@ -18,13 +19,15 @@ public class PiegeCard extends EquipmentCard {
 	private Set<Player> targets;
 
 	@Override
-	public void play(AI ai) {
-		ai.configure(this);
-		if (targets != null) {
-			for(Player target : targets) {
-				Utils.TransferMoney(target, owner, 2000);
-			}
-		}
+	public Action play(AI ai) {
+		// todo define and support these kind of cards
+//		ai.configure(this);
+//		if (targets != null) {
+//			for(Player target : targets) {
+//				Utils.TransferMoney(target, owner, 2000);
+//			}
+//		}
+		return null;
 	}
 	
 	public Set<Player> getTargets() {

@@ -5,18 +5,18 @@ import java.util.Stack;
 
 import com.holdup.ai.SoSoAI;
 import com.holdup.bank.Bank;
+import com.holdup.card.Card;
 import com.holdup.card.Deck;
-import com.holdup.card.basic.BankCard;
-import com.holdup.card.basic.DrawCard;
+import com.holdup.card.action.MoneyTransfer;
+import com.holdup.card.equipment.BankCard;
 import com.holdup.card.equipment.CouteauCard;
 import com.holdup.card.equipment.DeuxPistoletCard;
-import com.holdup.card.equipment.EquipmentCard;
 import com.holdup.card.equipment.GadgetDeDistractionCard;
-import com.holdup.card.equipment.LargeBagCard;
+import com.holdup.card.equipment.GrosSacCard;
 import com.holdup.card.equipment.MatraqueCard;
 import com.holdup.card.equipment.PanierDePartageCard;
 import com.holdup.card.equipment.PorteVoixCard;
-import com.holdup.card.equipment.SilencerCard;
+import com.holdup.card.equipment.SilencieuxCard;
 import com.holdup.player.Player;
 import com.holdup.player.role.Coyote;
 import com.holdup.player.role.Greedy;
@@ -26,35 +26,38 @@ public class Holdup {
 	public static void main(String[] args) {
 		Statistics statistics = new Statistics();
 		
-		for (int i=0;i<5;i++) {
+		for (int i=0;i<1000;i++) {
 			Game game = new Game(new SoSoAI());
-			Bank bank = new Bank(Rules.BANK_STARTING_MONEY);
+			Bank bank = new Bank(Rules.TOTAL_BANK_MONEY);
 			
-			Stack<EquipmentCard> equipmentCards = new Stack<EquipmentCard>();
-			for (int j=0; j<10; j++) {
-				equipmentCards.add(new SilencerCard(game));
+			Stack<Card> cards = new Stack<Card>();
+			for (int j=0; j<8; j++) {
+				cards.add(new SilencieuxCard(game));
 			}
-			equipmentCards.add(new CouteauCard(game));
-			equipmentCards.add(new CouteauCard(game));
-			equipmentCards.add(new DeuxPistoletCard(game));
-			equipmentCards.add(new DeuxPistoletCard(game));
-			equipmentCards.add(new GadgetDeDistractionCard(game));
-			equipmentCards.add(new GadgetDeDistractionCard(game));
-			equipmentCards.add(new MatraqueCard(game));
-			equipmentCards.add(new MatraqueCard(game));
-			equipmentCards.add(new LargeBagCard(game));
-			equipmentCards.add(new LargeBagCard(game));
-			equipmentCards.add(new PanierDePartageCard(game));
-			equipmentCards.add(new PanierDePartageCard(game));
-			equipmentCards.add(new PorteVoixCard(game));
-			equipmentCards.add(new PorteVoixCard(game));
+
+			for (int j=0; j<8; j++) {
+				cards.add(new BankCard(game));
+			}
 			
-			Deck discard = new Deck(new Stack<EquipmentCard>());
-			Deck pile = new Deck(equipmentCards, discard);
+			cards.add(new CouteauCard(game));
+			cards.add(new CouteauCard(game));
+			cards.add(new DeuxPistoletCard(game));
+			cards.add(new DeuxPistoletCard(game));
+			cards.add(new GadgetDeDistractionCard(game));
+			cards.add(new GadgetDeDistractionCard(game));
+			cards.add(new MatraqueCard(game));
+			cards.add(new MatraqueCard(game));
+			cards.add(new GrosSacCard(game));
+			cards.add(new GrosSacCard(game));
+			cards.add(new PanierDePartageCard(game));
+			cards.add(new PanierDePartageCard(game));
+			cards.add(new PorteVoixCard(game));
+			cards.add(new PorteVoixCard(game));
+			
+			Deck discard = new Deck(new Stack<Card>());
+			Deck pile = new Deck(cards, discard);
 			pile.shuffle();
 	
-//			Accomplice accomplice1 = new Accomplice();
-//			Accomplice accomplice2 = new Accomplice();
 			Coyote coyote = new Coyote();
 			Coyote coyote2 = new Coyote();
 			Leader leader = new Leader();
@@ -70,17 +73,10 @@ public class Holdup {
 			playerCoyote.draw(pile, Rules.NUMBER_OF_EQUIPMENT_CARDS_PICKED_AT_START);
 			playerCoyote2.draw(pile, Rules.NUMBER_OF_EQUIPMENT_CARDS_PICKED_AT_START);
 			
-			playerGreedy.draw(new BankCard(game));
-			playerGreedy.draw(new DrawCard(game));
-			playerLeader.draw(new BankCard(game));
-			playerLeader.draw(new DrawCard(game));
-			playerCoyote.draw(new BankCard(game));
-			playerCoyote.draw(new DrawCard(game));
-			playerCoyote2.draw(new BankCard(game));
-			playerCoyote2.draw(new DrawCard(game));
-			
-//			accomplice1.setAccomplice(playerAccomplice2);
-//			accomplice2.setAccomplice(playerAccomplice1);
+			MoneyTransfer.create(bank, playerGreedy, Rules.PLAYER_STARTING_MONEY).doo();
+			MoneyTransfer.create(bank, playerLeader, Rules.PLAYER_STARTING_MONEY).doo();
+			MoneyTransfer.create(bank, playerCoyote, Rules.PLAYER_STARTING_MONEY).doo();
+			MoneyTransfer.create(bank, playerCoyote2, Rules.PLAYER_STARTING_MONEY).doo();
 			
 			game.setDeck(pile);
 			game.setDiscardDeck(discard);

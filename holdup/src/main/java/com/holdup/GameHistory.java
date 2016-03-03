@@ -10,9 +10,14 @@ public class GameHistory {
 	private List<Player> winners;
 	private int turnCount;
 	private List<Turn> turns = new ArrayList<Turn>();
+	private final Game game;
+	
+	public Game getGame() {
+		return game;
+	}
 
-	public GameHistory() {
-
+	public GameHistory(Game game) {
+		this.game = game;
 	}
 
 	public List<Player> getWinners() {

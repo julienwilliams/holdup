@@ -1,13 +1,16 @@
 package com.holdup.card.equipment;
 
 import com.holdup.Game;
-import com.holdup.Utils;
 import com.holdup.ai.AI;
+import com.holdup.card.Card;
+import com.holdup.card.action.Action;
+import com.holdup.card.action.MoneyTransfer;
 import com.holdup.player.Player;
 
-public class GadgetDeDistractionCard extends EquipmentCard {
+public class GadgetDeDistractionCard extends Card {
 
 	/* Gadget de distraction: vole 3000 d'un joueur et le donne à un autre joueur */
+	private final static int CARD_AMOUNT = 3000;
 	
 	public GadgetDeDistractionCard(Game game) {
 		super(game);
@@ -16,11 +19,10 @@ public class GadgetDeDistractionCard extends EquipmentCard {
 	private Player collector;
 	private Player target;
 
-
 	@Override
-	public void play(AI ai) {
+	public Action play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(getTarget(), getCollector(), 3000);
+		return MoneyTransfer.create(target, collector, CARD_AMOUNT);
 	}
 
 
@@ -45,6 +47,6 @@ public class GadgetDeDistractionCard extends EquipmentCard {
 
 	@Override
 	public String toString() {
-		return "Gadget De Distraction";
+		return "Gadget De Distraction (t: " + getTarget() + ")";
 	}
 }

@@ -1,12 +1,17 @@
 package com.holdup.card.equipment;
 
 import com.holdup.Game;
-import com.holdup.Utils;
 import com.holdup.ai.AI;
+import com.holdup.card.Card;
+import com.holdup.card.action.Action;
+import com.holdup.card.action.ActionList;
+import com.holdup.card.action.MoneyTransfer;
 import com.holdup.player.Player;
 
-public class DeuxPistoletCard extends EquipmentCard  {
+public class DeuxPistoletCard extends Card  {
 
+	private final static int DP_AMOUNT_PER_PLAYER = 1000;
+	
 	/* Deux Pistolet : rob 1000 to 1 player and 1000 to the bank*/
 	
 	public DeuxPistoletCard(Game game) {
@@ -16,10 +21,12 @@ public class DeuxPistoletCard extends EquipmentCard  {
 	private Player target;
 	
 	@Override
-	public void play(AI ai) {
+	public Action play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(getTarget(), owner, 1000);
-		Utils.TransferMoney(getGame().getBank(), owner, 1000);
+		return ActionList.create(
+				MoneyTransfer.create(getTarget(), owner, DP_AMOUNT_PER_PLAYER),
+				MoneyTransfer.create(getGame().getBank(), owner, DP_AMOUNT_PER_PLAYER)
+				);
 	}
 
 	public Player getTarget() {
@@ -32,6 +39,6 @@ public class DeuxPistoletCard extends EquipmentCard  {
 
 	@Override
 	public String toString() {
-		return "Deux Pistolets";
+		return "Deux Pistolets ( t:" + getTarget() + ")";
 	}
 }

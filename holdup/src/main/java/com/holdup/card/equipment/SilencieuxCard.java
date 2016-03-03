@@ -7,11 +7,11 @@ import com.holdup.card.action.Action;
 import com.holdup.card.action.MoneyTransfer;
 import com.holdup.player.Player;
 
-public class MatraqueCard extends Card {
+public class SilencieuxCard extends Card {
 
-	private final static int CARD_AMOUNT = 3000;
+	private final static int CARD_AMOUNT = 2000;
 	
-	public MatraqueCard(Game game) {
+	public SilencieuxCard(Game game) {
 		super(game);
 	}
 
@@ -20,21 +20,19 @@ public class MatraqueCard extends Card {
 	@Override
 	public Action play(AI ai) {
 		ai.configure(this);
-		return MoneyTransfer.create(getTarget(), getGame().getBank(), CARD_AMOUNT);
+		return MoneyTransfer.create(target, owner, CARD_AMOUNT);
 	}
-
-
+	
 	public Player getTarget() {
 		return target;
 	}
-
-
+	
 	public void setTarget(Player target) {
 		this.target = target;
 	}
-
+	
 	@Override
 	public String toString() {
-		return "Matraque (t: " + getTarget() + ")";
+		return "Silencieux (t: " + getTarget() + ")";
 	}
 }

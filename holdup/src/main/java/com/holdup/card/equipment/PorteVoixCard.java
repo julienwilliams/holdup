@@ -1,13 +1,17 @@
 package com.holdup.card.equipment;
 
 import com.holdup.Game;
-import com.holdup.Utils;
 import com.holdup.ai.AI;
+import com.holdup.card.Card;
+import com.holdup.card.action.Action;
+import com.holdup.card.action.ActionList;
+import com.holdup.card.action.MoneyTransfer;
 import com.holdup.player.Player;
 
-public class PorteVoixCard extends EquipmentCard {
+public class PorteVoixCard extends Card {
 
-	/* rob 4000 from bank, give 1000 to 1 player and 1000 to another player*/
+	private final static int BANK_AMOUNT = 2000;
+	private final static int REDIST_AMOUNT = 1000;
 	
 	public PorteVoixCard(Game game) {
 		super(game);
@@ -18,11 +22,13 @@ public class PorteVoixCard extends EquipmentCard {
 
 	
 	@Override
-	public void play(AI ai) {
+	public Action play(AI ai) {
 		ai.configure(this);
-		Utils.TransferMoney(getGame().getBank(), owner, 2000);
-		Utils.TransferMoney(getGame().getBank(), getTarget1(), 1000);
-		Utils.TransferMoney(getGame().getBank(), getTarget2(), 1000);
+		return ActionList.create(
+				MoneyTransfer.create(getGame().getBank(), owner, BANK_AMOUNT),
+				MoneyTransfer.create(getGame().getBank(), getTarget1(), REDIST_AMOUNT),
+				MoneyTransfer.create(getGame().getBank(), getTarget1(), REDIST_AMOUNT)
+				);
 	}
 
 
@@ -47,6 +53,6 @@ public class PorteVoixCard extends EquipmentCard {
 
 	@Override
 	public String toString() {
-		return "Porte Voix";
+		return "Porte Voix (t1: " + getTarget1() + ", t2: " + getTarget2() + ")";
 	}
 }

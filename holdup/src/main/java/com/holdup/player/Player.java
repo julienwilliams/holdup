@@ -8,7 +8,6 @@ import com.holdup.GameItem;
 import com.holdup.MoneyHolder;
 import com.holdup.card.Card;
 import com.holdup.card.Deck;
-import com.holdup.card.equipment.EquipmentCard;
 import com.holdup.player.role.Role;
 
 public class Player extends GameItem implements MoneyHolder, Cloneable {
@@ -18,7 +17,7 @@ public class Player extends GameItem implements MoneyHolder, Cloneable {
 	}
 
 	private final Role role;
-	private int money = 2000;
+	private int money = 0;
 	private List<Card> cards = new ArrayList<Card>();
 	private final String name;
 	
@@ -29,8 +28,8 @@ public class Player extends GameItem implements MoneyHolder, Cloneable {
 	}
 	
 	public void draw(Deck deck, int nb) {
-		List<EquipmentCard> picked = deck.pick(nb);
-		for (EquipmentCard card : picked) {
+		List<Card> picked = deck.pick(nb);
+		for (Card card : picked) {
 			card.setOwner(this);
 		}
 		cards.addAll(picked);

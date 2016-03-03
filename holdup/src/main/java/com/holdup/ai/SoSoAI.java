@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.holdup.Game;
 import com.holdup.card.Card;
-import com.holdup.card.equipment.CleDuCoffreCard;
+import com.holdup.card.action.Action;
 import com.holdup.card.equipment.CouteauCard;
 import com.holdup.card.equipment.DeuxPistoletCard;
 import com.holdup.card.equipment.GadgetDeDistractionCard;
@@ -14,50 +14,25 @@ import com.holdup.card.equipment.MatraqueCard;
 import com.holdup.card.equipment.PanierDePartageCard;
 import com.holdup.card.equipment.PiegeCard;
 import com.holdup.card.equipment.PorteVoixCard;
-import com.holdup.card.equipment.RevitaillementCard;
-import com.holdup.card.equipment.SilencerCard;
+import com.holdup.card.equipment.SilencieuxCard;
 import com.holdup.player.Player;
-import com.rits.cloning.Cloner;
 
 
 public class SoSoAI implements AI {
 
-	
-	static Player findPlayer(Game game, String name) {
-		for (Player p : game.getPlayers()) {
-			if (p.getName().equals(name)) {
-				return p;
-			}
-		}
-		
-		return null;
-	}
-
-	static Card findCard(Player player, Class<?> cardClass) {
-		for (Card c : player.getCards()) {
-			if (c.getClass().equals(cardClass) ) {
-				return c;
-			}
-		}
-		
-		return null;
-	}
-	
-	// The cloning BS can be replaced by play / unplay each card while evaluating - MUCH FASTER!
 	public Card chooseCard(Player player) {
 		float maxEval = 0.0f;
 		Card chosenCard = null;
 		for (Card c : player.getCards()) {
-			Game clonedGame = new Cloner().deepClone(player.getGame());
-			
-			Player clonedPlayer = findPlayer(clonedGame, player.getName());
-			Card clonedCard = findCard(clonedPlayer, c.getClass());
-			
-			clonedCard.play(this);
-			float eval = clonedPlayer.getRole().evaluate(clonedPlayer);
+			Action action = c.play(this);
+			action.doo();
+			float eval = player.getRole().evaluate(player);
 			if (eval >= maxEval) {
 				chosenCard = c;
+				maxEval = eval;
 			}
+			action.undo();
+			
 		}
 		
 		return chosenCard;
@@ -84,7 +59,7 @@ public class SoSoAI implements AI {
 		return eligiblePlayers.get(new SecureRandom().nextInt(eligiblePlayers.size()));
 	}
 	
-	public void configure(SilencerCard card) {
+	public void configure(SilencieuxCard card) {
 		card.setTarget(getNextEligiblePlayer(card));
 	}
 
@@ -124,15 +99,4 @@ public class SoSoAI implements AI {
 		// TODO Auto-generated method stub
 		
 	}
-
-	public void configure(RevitaillementCard card) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void configure(CleDuCoffreCard card) {
-		// TODO Auto-generated method stub
-		
-	}
-	
 }
