@@ -14,9 +14,9 @@ public class ActionList extends ArrayList<Action> implements Action {
 		return actionList;
 	}
 	
-	public void doo() {
+	public void doIt() {
 		for (Action a : this) {
-			a.doo();
+			a.doIt();
 		}
 	}
 	

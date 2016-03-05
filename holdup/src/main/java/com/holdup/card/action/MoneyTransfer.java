@@ -18,7 +18,7 @@ public class MoneyTransfer implements Action {
 		this.amount = amount;
 	}
 
-	public void doo() {
+	public void doIt() {
 		destination.add(amount);
 		source.substract(amount);
 	}

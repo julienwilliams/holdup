@@ -2,8 +2,13 @@ package com.holdup.ai;
 
 import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.collections.CollectionUtils;
+
+import com.google.common.collect.Maps;
 import com.holdup.Game;
 import com.holdup.card.Card;
 import com.holdup.card.action.Action;
@@ -16,16 +21,42 @@ import com.holdup.card.equipment.PiegeCard;
 import com.holdup.card.equipment.PorteVoixCard;
 import com.holdup.card.equipment.SilencieuxCard;
 import com.holdup.player.Player;
+import com.holdup.player.role.Role;
 
 
 public class SoSoAI implements AI {
 
+	// TODO
+	/*
+	 * Create a Map<Player, Map<Player, List<Role>>> which is a map of each other player and the list of roles that they can be 
+	 * When choosing the card, evaluate the player's win condition but also the other players win conditions after the card is played and ponderate accordingly
+	 * Each turn, evaluate every player's possible role with the win conditions for these roles. If determined that
+	 * The player is not of that role, remove it from the list for each player's standpoint.
+	 * 
+	 * 
+	 * When configuring the cards, must also iterate in each possible way the card could be played to choose the best.
+	 */
+	
+	private Map<Player, Map<Player, List<Role>>> playerStandpoint_player_roles = null;
+	
+	@SuppressWarnings("unchecked")
+	public void init(Game game) {
+		
+		List<Player> allPlayers = game.getPlayers();
+		
+		playerStandpoint_player_roles =  Maps.newHashMap();
+		for (Player p : allPlayers) {
+			List<Player> otherPlayers = (List<Player>)CollectionUtils.subtract(allPlayers, Collections.singletonList(p));
+			playerStandpoint_player_roles.put(p, Maps.<Player, List<Role>>newHashMap());	
+		}
+	}
+	
 	public Card chooseCard(Player player) {
 		float maxEval = 0.0f;
 		Card chosenCard = null;
 		for (Card c : player.getCards()) {
 			Action action = c.play(this);
-			action.doo();
+			action.doIt();
 			float eval = player.getRole().evaluate(player);
 			if (eval >= maxEval) {
 				chosenCard = c;

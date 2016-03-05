@@ -4,7 +4,7 @@ import com.holdup.player.Player;
 
 public class Coyote extends Role {
 
-	private static final int COYOTE_WIN_AMOUNT = 9000;
+	private static final int COYOTE_WIN_AMOUNT = 12000;
 
 	public Coyote() {
 	}

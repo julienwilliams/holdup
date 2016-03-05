@@ -47,7 +47,7 @@ public class Turn extends GameItem {
 			currentPlayer = players.get(index);
 			Card card = player_card.get(currentPlayer);
 			Action play = card.play(game.getAi());
-			play.doo();
+			play.doIt();
 		}
 	}
 	

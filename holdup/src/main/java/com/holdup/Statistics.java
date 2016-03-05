@@ -13,7 +13,7 @@ import com.holdup.player.Player;
 
 
 public class Statistics {
-	private static final boolean ENABLE_DETAILS = false;
+	private static final boolean ENABLE_DETAILS = true;
 	List<GameHistory> gameResults = new ArrayList<GameHistory>();
 	Map<String, Integer> roleWon = new HashMap<String, Integer>();
 	int totalTurns;
